@@ -70,17 +70,11 @@ async function main() {
   rl.question("Masukkan start date (YYYY-MM-DD): ", async (startInput) => {
     rl.question("Masukkan end date (YYYY-MM-DD): ", async (endInput) => {
       try {
-        let startDate = new Date(startInput);
-        let endDate = new Date(endInput);
+        const startDate = new Date(startInput);
+        const endDate = new Date(endInput);
 
-        if (isNaN(startDate) || isNaN(endDate)) {
-          throw new Error("Tanggal tidak valid. Pastikan formatnya benar (YYYY-MM-DD).");
-        }
-
-        // Tukar tanggal jika startDate > endDate
-        if (startDate > endDate) {
-          console.log("Tanggal awal lebih besar dari tanggal akhir, menukar urutan tanggal...");
-          [startDate, endDate] = [endDate, startDate];
+        if (isNaN(startDate) || isNaN(endDate) || startDate > endDate) {
+          throw new Error("Tanggal tidak valid. Pastikan format dan urutan benar.");
         }
 
         const dates = generateDates(startDate, endDate);
